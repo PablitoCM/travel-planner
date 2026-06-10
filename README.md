@@ -71,5 +71,3 @@ All place names and descriptions from the API are passed through `escHtml()` bef
 - No API keys · No npm · No build tools
 
 ---
-
-*Politechnika Krakowska — Problem Solving — Academic Year 2025/2026*
