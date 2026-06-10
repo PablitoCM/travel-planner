@@ -1,35 +1,14 @@
-// ================================================
-// TRAVEL PLANNER — app.js
-// ================================================
-// Sections:
-//   1. CONFIG & CONSTANTS
-//   2. STATE
-//   3. API — Overpass (OSM) + Nominatim (100% free, no key)
-//   4. CACHE (LocalStorage)
-//   5. RENDER — results
-//   6. RENDER — trip list
-//   7. MODAL — detail view
-//   8. CUSTOM PLACE FORM
-//   9. FILTERS & SORT
-//   10. SEARCH FLOW
-//   11. TOAST
-//   12. EVENT LISTENERS
-//   13. INIT
-//   14. UNIT TESTS  →  run  runTests()  in browser console
-// ================================================
-
-
 // ---- 1. CONFIG & CONSTANTS ----
 
-// Nominatim: geocode city name → lat/lon (free, no key)
+// Nominatim: geocode city name
 const NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
-// Overpass: query POIs from OpenStreetMap (free, no key)
+// Overpass: query POIs from OpenStreetMap
 const OVERPASS_API  = "https://overpass-api.de/api/interpreter";
 
 const CACHE_PREFIX  = "tp_cache_";
 const CACHE_TTL_MS  = 10 * 60 * 1000;   // 10 minutes
 
-// OSM tag value → human-readable label
+// OSM tag value
 const TAG_LABELS = {
   museum: "Museum", gallery: "Gallery", attraction: "Attraction",
   viewpoint: "Viewpoint", artwork: "Artwork", zoo: "Zoo",
@@ -42,7 +21,7 @@ const TAG_LABELS = {
   nature_reserve: "Nature Reserve",
 };
 
-// Category filter value → Overpass node pattern (without bounding box)
+// Category filter value
 const CATEGORY_QUERIES = {
   museums:      `node["tourism"~"museum|gallery"]`,
   historic:     `node["historic"]`,
@@ -81,10 +60,6 @@ let trip        = JSON.parse(localStorage.getItem("trip")) || [];
 
 // ---- 3. API HELPERS ----
 
-/**
- * Geocode city → { lat, lon, displayName, bbox }
- * bbox = [south, north, west, east] strings from Nominatim
- */
 async function geocodeCity(city) {
   const url = `${NOMINATIM_API}?q=${encodeURIComponent(city)}&format=json&limit=1&addressdetails=1`;
   const res  = await fetch(url, {
