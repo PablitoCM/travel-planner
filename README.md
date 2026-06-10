@@ -71,3 +71,5 @@ All place names and descriptions from the API are passed through `escHtml()` bef
 - No API keys · No npm · No build tools
 
 ---
+
+*Problem Solving - Final Project. Pablo Cervera Moreno & Diego Pérez Cuno*
