@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="code/style.css">
+</head>
+<body>
+
+  <!-- ========== HERO SEARCH ========== -->
+  <header class="hero" id="hero">
+    <div class="hero-inner">
+      <h1 class="hero-logo">✈ Travel Planner</h1>
+      <p class="hero-sub">Discover places. Build your trip.</p>
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Type a city… e.g. Paris" autocomplete="off">
+        <button id="searchBtn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== FILTERS (hidden until first search) ========== -->
+  <div class="filters-bar hidden" id="filtersBar">
+    <div class="filters-inner">
+      <div class="filter-group">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter">
+          <option value="">All categories</option>
+          <option value="museums">Museums</option>
+          <option value="historic">Historic</option>
+          <option value="natural">Nature</option>
+          <option value="religion">Religious</option>
+          <option value="architecture">Architecture</option>
+          <option value="cultural">Cultural</option>
+          <option value="amusements">Amusements</option>
+          <option value="sport">Sport</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="sortBy">Sort by</label>
+        <select id="sortBy">
+          <option value="name_asc">Name A→Z</option>
+          <option value="name_desc">Name Z→A</option>
+          <option value="rating_desc">Rating ↓</option>
+        </select>
+      </div>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+  </div>
+
+  <!-- ========== MAIN LAYOUT ========== -->
+  <main class="layout" id="mainLayout">
+
+    <!-- LEFT: results -->
+    <section class="panel" id="resultsPanel">
+      <h2 class="panel-title">Results</h2>
+      <div id="results">
+        <p class="placeholder">Search for a city to see places.</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: trip list + add form -->
+    <aside class="side-col">
+
+      <!-- Trip list -->
+      <div class="panel" id="tripPanel">
+        <div class="trip-header">
+          <h2 class="panel-title">My Trip</h2>
+          <div class="trip-sort">
+            <select id="tripSort">
+              <option value="added">Order added</option>
+              <option value="name_asc">Name A→Z</option>
+              <option value="category">Category</option>
+            </select>
+          </div>
+        </div>
+        <ul id="tripItems"></ul>
+        <p class="empty-msg" id="emptyMsg">Your list is empty. Add some places!</p>
+      </div>
+
+      <!-- Add custom place -->
+      <div class="panel" id="addPanel">
+        <h2 class="panel-title">Add Custom Place</h2>
+        <div class="custom-form">
+          <div class="field-wrap">
+            <input type="text" id="customName" placeholder="Place name *" maxlength="80">
+            <span class="field-error" id="errName"></span>
+          </div>
+          <div class="field-wrap">
+            <select id="customCategory">
+              <option value="">Select category *</option>
+              <option value="museums">Museum</option>
+              <option value="historic">Historic</option>
+              <option value="natural">Nature</option>
+              <option value="religion">Religious</option>
+              <option value="architecture">Architecture</option>
+              <option value="cultural">Cultural</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="field-error" id="errCat"></span>
+          </div>
+          <div class="field-wrap">
+            <input type="text" id="customCity" placeholder="City (optional)" maxlength="60">
+          </div>
+          <button id="addCustomBtn">+ Add to Trip</button>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- ========== DETAIL MODAL ========== -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal" id="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="code/app.js"></script>
+</body>
+</html>
