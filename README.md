@@ -1,4 +1,4 @@
-# ✈ Travel Planner
+# ✈ Travel Planner - SPOTR
 
 A client-side web application that lets users search for tourist attractions in any city, filter results by category, and build a personal Trip List — all without a backend or API key.
 
@@ -49,7 +49,10 @@ Both APIs are completely free and require no registration or API key.
 ## Design Decisions
 
 **Overpass API instead of OpenTripMap**
-OpenTripMap was originally chosen but changed its policy to require a paid API key mid-development. The Overpass API (OpenStreetMap) was selected as a replacement: genuinely free, no key needed, and richer metadata (opening hours, phone, Wikipedia links).
+OpenTripMap was evaluated as an initial candidate but discarded in favour of the Overpass API for two concrete reasons.
+First, real-world usage of OpenTripMap requires obtaining and managing an API key. Although a free tier exists, this adds configuration friction that conflicts with the project goal of a zero-setup application that runs immediately without any credentials.
+Second, the metadata returned by OpenTripMap is limited compared to what OSM nodes carry natively. The Overpass API provides opening hours, phone numbers, website URLs, and Wikipedia tags out of the box, enabling the detail modal without any secondary requests.
+Staying within the OpenStreetMap ecosystem also meant that Nominatim (geocoding) and Overpass (POI retrieval) share the same underlying data model, simplifying the normalisation step. The trade-off is the need to learn Overpass QL, a domain-specific query language, which added initial development time but produced a more capable and fully open result.
 
 **Client-side filtering**
 Changing the category filter does not trigger a new API call. The full result set is kept in memory and filtered instantly using predicate functions (`FILTER_MATCHERS`). This gives instant feedback and avoids unnecessary API requests.
