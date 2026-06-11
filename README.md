@@ -11,6 +11,7 @@ A client-side web application that lets users search for tourist attractions in 
 ```
 travel-planner/
 ├── index.html        ← Page structure: layout, modals, form
+├── Travel_Planner_Report.pdf         ← Project report
 ├── README.md         ← This file
 └── code/
     ├── style.css     ← All styles (variables, layout, components)
